@@ -1,201 +1,70 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Ender SMP Wiki – Login Required</title>
-<link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
-<style>
-body{margin:0;font-family:'Minecraft',sans-serif;color:white;overflow-x:hidden;background:#0b0f2f;}
-.bg{position:fixed;width:120%;height:120%;top:-10%;left:-10%;background:url('https://files.catbox.moe/3ujznt.jpg') no-repeat center/cover;filter:brightness(0.4);z-index:-1;animation:movebg 40s linear infinite;}
-@keyframes movebg{0%{transform:scale(1) translate(0,0);}50%{transform:scale(1.05) translate(-20px,10px);}100%{transform:scale(1) translate(0,0);}}
-header{text-align:center;padding:35px 20px;}
-.logo{width:150px;margin-bottom:10px;filter:drop-shadow(0 0 15px #9d5bff);}
-h1{font-size:42px;text-shadow:0 0 10px #9d5bff;}
-.container{max-width:1000px;margin:auto;padding:20px;display:none;} /* Ẩn container ban đầu */
-.accordion{background:rgba(255,255,255,0.08);color:white;cursor:pointer;padding:18px;width:100%;border:2px solid #9d5bff;border-radius:8px;text-align:left;outline:none;font-size:18px;transition:0.4s;margin-top:15px;}
-.accordion:hover{background:rgba(255,255,255,0.15);}
-.active,.accordion:hover{border-color:#ffdd73;box-shadow:0 0 10px #ffdd73;}
-.panel{padding:0 18px;display:none;background-color:rgba(255,255,255,0.05);overflow:hidden;border-left:3px solid #9d5bff;margin-bottom:10px;border-radius:0 8px 8px 0;}
-.copy-btn{background:#9d5bff;border:none;padding:7px 14px;color:white;border-radius:8px;cursor:pointer;font-size:14px;margin-left:10px;}
-.copy-btn:hover{background:#b97cff;}
-.btn{display:inline-block;padding:10px 15px;background:#ffdd73;color:black;border-radius:8px;font-weight:bold;text-decoration:none;margin-top:8px;box-shadow:0 0 10px #ffdd73;transition:0.2s;}
-.btn:hover{background:white;box-shadow:0 0 20px #fff;}
-#topBtn{position:fixed;bottom:25px;right:25px;padding:12px 15px;background:#9d5bff;border:none;border-radius:50%;color:white;font-size:22px;cursor:pointer;display:none;box-shadow:0 0 10px #9d5bff;}
-#topBtn:hover{background:#b97cff;}
-footer{text-align:center;padding:20px;margin-top:30px;background:rgba(0,0,0,0.5);border-top:2px solid #9d5bff;}
-
-/* Particles + dragon */
-.particles{position:fixed;width:100%;height:100%;top:0;left:0;pointer-events:none;z-index:1;}
-.particle{position:absolute;width:8px;height:8px;background:#ffdd73;border-radius:50%;opacity:0.8;animation:moveParticle linear infinite;}
-@keyframes moveParticle{0%{transform:translateY(0) translateX(0) rotate(0deg);}100%{transform:translateY(-1200px) translateX(300px) rotate(360deg);}}
-.dragon{position:fixed;width:150px;bottom:10%;left:-200px;z-index:2;animation:flyDragon 20s linear infinite;}
-@keyframes flyDragon{0%{left:-200px;transform:rotate(0deg);}50%{left:60%;transform:rotate(10deg);}100%{left:110%;transform:rotate(0deg);}}
-
-/* Login */
-#loginForm{background:rgba(0,0,0,0.6);padding:30px;border-radius:12px;max-width:350px;margin:50px auto;text-align:center;}
-#loginForm input{width:80%;padding:10px;margin:10px 0;border-radius:6px;border:none;}
-#loginForm button{padding:10px 20px;margin-top:10px;background:#9d5bff;color:white;border:none;border-radius:8px;cursor:pointer;}
-#loginForm button:hover{background:#b97cff;}
-#userInfo{display:none;text-align:center;margin:20px;color:#ffdd73;font-size:20px;}
-</style>
+    <meta charset="UTF-8">
+    <title>Website Bị Hack</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Courier New", Courier, monospace;
+            background: #000;
+            color: #ff0000;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            font-size: 4em;
+            margin: 0.2em;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        .warning {
+            color: yellow;
+            font-size: 2em;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-<div class="bg"></div>
-<img src="https://files.catbox.moe/lpz613.png" class="dragon">
-<div class="particles"></div>
-
-<header>
-<img src="https://files.catbox.moe/ylsst1.png" class="logo">
-<h1>🌌 ENDER SMP – WIKI MAX 🌌</h1>
-</header>
-
-<div id="loginForm">
-<h2>🔐 Đăng nhập để xem Wiki</h2>
-<input type="text" id="username" placeholder="Nhập tên của bạn">
-<button onclick="login()">Đăng nhập</button>
-</div>
-
-<div id="userInfo">
-<p>Chào <b id="userDisplay"></b>! Bạn đã đăng nhập thành công 🎉</p>
-</div>
-
-<div class="container">
-<!-- Accordion sections -->
-<button class="accordion">📡 Thông tin Sever</button>
-<div class="panel">
-<p>💻 Java IP: <b id="javaIP">ip demo</b><button class="copy-btn" onclick="copyText('javaIP')">Copy</button></p>
-<p>📱 Bedrock IP: <b id="beIP">ip demo</b><button class="copy-btn" onclick="copyText('beIP')">Copy</button></p>
-<a class="btn" href="#">📥 Tải Minecraft</a>
-</div>
-
-<button class="accordion">📜 Luật Sever</button>
-<div class="panel">
-<ul>
-<li>⚔️ PvP tự do</li>
-<li>💥 Cấm phá base / grief</li>
-<li>🔍 Cấm hack / xray / cheat</li>
-<li>🤬 Không toxic / spam</li>
-<li>🚫 Không lạm dụng bug</li>
-</ul>
-</div>
-
-<button class="accordion">🏆 Rank</button>
-<div class="panel">
-<ul>
-<li>⭐ Member – Demo</li>
-<li>💠 VIP – Demo</li>
-<li>💎 VIP+ – Demo</li>
-<li>🔥 Legend – Demo</li>
-</ul>
-</div>
-
-<button class="accordion">🔧 Plugin & Tính năng</button>
-<div class="panel">
-<ul>
-<li>🏠 /home – đặt nhiều home</li>
-<li>📍 /tpa – Teleport</li>
-<li>🔄 /back – quay lại nơi chết</li>
-<li>⚡ Anti-cheat mạnh</li>
-<li>🛡 Claim bảo vệ nhà</li>
-</ul>
-</div>
-
-<button class="accordion">🎉 Event</button>
-<div class="panel">
-<ul>
-<li>🥳 Give Away</li>
-<li>⚔ Member mới được tăng 20% khoáng sản</li>
-<li>Demo</li>
-</ul>
-</div>
-
-<button class="accordion">💰 Donate & VIP</button>
-<div class="panel">
-<ul>
-<li>VIP 1 – Demo</li>
-<li>VIP+ – Demo</li>
-<li>Legend – Demo</li>
-</ul>
-<a class="btn" href="#">Mua VIP</a>
-</div>
-
-<button class="accordion">🛡 Staff</button>
-<div class="panel">
-<ul>
-<li>Admin: vietphongg36</li>
-<li>Mod: vietphongg36</li>
-<li>Helper: Việt Hưng</li>
-</ul>
-</div>
-
-<button class="accordion">❓ FAQ</button>
-<div class="panel">
-<ul>
-<li>Q: Chơi có lag không? A: Không, 24/7 xanh ping.</li>
-<li>Q: Có keep inventory không? A: Không, rớt đồ sinh tồn thật.</li>
-<li>Q: Có event thường xuyên không? A: Có, hàng tuần.</li>
-</ul>
-</div>
-
-<button class="accordion">💀 Chết là mất đồ</button>
-<div class="panel">
-<p>⚠ Chết rớt đồ – chơi đúng nghĩa sinh tồn!</p>
-</div>
-
-</div>
-
-<button id="topBtn" onclick="scrollToTop()">⬆</button>
-<footer>© 2025 ENDER SMP – Designed by DuyAnh 💜</footer>
-
-<script>
-// Accordion
-var acc = document.getElementsByClassName("accordion");
-for(let i=0;i<acc.length;i++){
-acc[i].addEventListener("click",function(){
-this.classList.toggle("active");
-var panel=this.nextElementSibling;
-panel.style.display=(panel.style.display==="block")?"none":"block";
-});
-}
-
-// Copy IP
-function copyText(id){let text=document.getElementById(id).innerText;navigator.clipboard.writeText(text);alert("✔ Đã copy: "+text);}
-
-// Scroll top
-window.onscroll=function(){document.getElementById("topBtn").style.display=(document.documentElement.scrollTop>150)?"block":"none";}
-function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
-
-// Particles
-const particles=document.querySelector(".particles");
-for(let i=0;i<50;i++){
-let div=document.createElement("div");div.className="particle";
-div.style.left=Math.random()*100+"%";div.style.top=Math.random()*100+"%";
-div.style.width=div.style.height=(Math.random()*4+4)+"px";
-div.style.animationDuration=(Math.random()*10+5)+"s";
-particles.appendChild(div);
-}
-
-// Login system – bắt buộc
-function login(){
-let user=document.getElementById("username").value.trim();
-if(user===""){alert("Vui lòng nhập tên!");return;}
-localStorage.setItem("enderUser",user);
-document.getElementById("loginForm").style.display="none";
-document.getElementById("userInfo").style.display="block";
-document.getElementById("userDisplay").innerText=user;
-document.querySelector(".container").style.display="block";
-}
-
-// Auto login if exists
-window.onload=function(){
-let user=localStorage.getItem("enderUser");
-if(user){
-document.getElementById("loginForm").style.display="none";
-document.getElementById("userInfo").style.display="block";
-document.getElementById("userDisplay").innerText=user;
-document.querySelector(".container").style.display="block";
-}
-}
-</script>
+    <h1>Сайт был взломан!</h1>
+    <p>взломан<strong>ngduyanh</strong></p>
+    <div class="warning">⚠️ Сайт был изменен ⚠️</div>
+    <p>⢰⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼
+⠀⢿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⠴⠶⠖⠒⠛⣿⣽⡟⠛⠓⠒⠶⠶⢤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠴⣯⠏
+⠀⠀⢿⣯⣿⠷⣶⣤⡴⣶⣶⣤⠤⠤⣤⣄⡀⠀⣀⡤⠶⠛⠉⠀⠀⠀⠀⠀⠀⠴⠿⣼⠿⠦⠀⠀⠀⠀⠀⠀⠉⠛⠲⢦⣄⣀⣤⣴⠒⣻⣿⣿⢻⣿⣿⣿⠋⣩⣴⠋⠀
+⠀⠀⠀⠙⠿⣦⣼⣟⢷⣷⢹⣿⣌⣿⡟⢺⣿⠛⠻⣄⠀⠀⠀⠀⢀⣠⣤⠤⠖⠒⠒⠛⠒⠒⠒⠦⠤⣤⣀⠀⠀⢀⣤⠖⠛⢿⣇⠐⡾⣷⣿⡟⢚⣿⣷⣿⠶⠋⠁⠀⠀
+⠀⠀⠀⠀⠀⠈⠙⠛⠛⠻⠾⢿⣾⣮⣗⣸⣿⣆⠄⠀⠙⣦⡖⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢉⣷⡟⠀⡀⢨⣽⣿⣽⣶⢿⡿⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠛⠉⠙⠻⢿⣷⣶⡂⣸⡟⠓⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠞⠛⣧⣄⣿⣾⣿⡋⠉⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠟⠁⠀⠀⠀⣠⠾⣿⣿⣿⣿⡁⠀⠈⢳⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⠀⠀⣿⣿⣿⣫⣶⠟⢦⡀⠀⠀⣀⠹⣆⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢀⡼⢿⡷⣾⠀⢀⡞⠁⠀⠹⡄⢻⣿⣿⡆⠀⠘⣿⣦⣤⣀⣀⠀⠀⣀⣀⣤⣶⣿⡯⠀⢀⣾⣿⡿⠋⢀⡞⠀⠀⠙⢆⣀⣿⣻⣯⣷⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⡾⠷⠛⢳⡞⣻⠋⠀⠀⠀⠀⢳⡀⢻⣿⣿⣦⣠⣿⡯⣷⡉⣽⠿⠿⠟⠉⣹⡯⣿⣷⣤⣾⣿⣿⠁⠀⣼⠃⠀⠀⠀⠈⠻⡍⠏⠁⠉⢷⡀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⡾⠁⠀⠀⠈⡱⠁⠀⠀⠀⠀⠀⠈⢷⠈⣿⣿⣿⠟⣿⣇⡝⣮⡈⠀⠀⠀⣴⡟⠀⢿⡟⢿⣻⣿⣇⠀⣰⠇⠀⠀⠀⠀⠀⠀⠙⡄⠀⠀⠀⢿⡀⠀⠀⠀
+⠀⠀⠀⠀⠀⣼⠇⠀⠀⠀⡼⠃⠀⠀⠀⣀⣀⣠⣤⣼⠿⣿⢿⠃⣰⠋⠈⠁⢻⡙⢶⣴⠟⣹⠃⠀⠀⠱⡄⢹⣿⣟⠲⢿⠤⠤⣤⣤⣀⡀⠀⠀⠸⡆⠀⠀⠈⣧⠀⠀⠀
+⠀⠀⠀⠀⢠⡏⠀⠀⠀⣰⣃⣤⠖⠋⣉⡡⢆⣠⠟⠁⣼⣿⡿⢸⣇⠶⠊⠀⢸⣷⠛⠉⢳⣿⠀⠀⠐⢶⠹⡌⣿⡿⣆⠈⠱⢦⡐⠦⣄⣉⣙⣶⣄⣹⡀⠀⠀⢸⡇⠀⠀
+⠀⠀⠀⠀⣾⠀⠀⢰⣶⣿⣿⣿⡿⢿⣥⣶⣟⣁⣠⣞⣽⠟⡇⢸⣿⡀⣀⡴⠋⢹⡄⠀⣸⣉⣻⣦⣄⣸⣰⡇⣿⢹⣮⣷⣤⣤⣿⠿⠞⣛⣿⣿⣿⣿⡿⠂⠀⠀⢿⠀⠀
+⠀⠀⠀⠀⡟⠀⠀⠀⢹⠋⠳⢿⣿⣷⡶⠦⢭⣽⣾⣿⡟⠰⢷⣘⣿⠁⠿⠋⠉⠙⣿⠉⡿⠉⠉⠉⠏⢩⣿⢠⣟⣐⣿⣿⢷⣾⣷⣒⣩⣿⠿⠟⠉⠀⢱⠀⠀⠀⢸⠀⠀
+⠀⠀⠀⢠⡇⠀⠀⠀⢸⠀⠀⠀⠈⠙⠻⠿⢿⣿⣿⣿⡟⣠⣾⣳⣽⣷⣦⢠⠄⣖⢹⣿⠃⠃⠠⠂⣰⣿⣿⢿⣧⣄⣻⣿⣿⣛⠟⠛⠋⠀⠀⠀⠀⠀⢸⡄⠀⠀⢸⡇⠀
+⠀⠀⠀⢸⡇⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⢀⣸⠿⠋⢻⣿⣿⣿⣿⡽⣽⣾⣿⣦⣬⠞⠏⠀⢤⣼⣿⣿⣿⢱⣿⣿⣿⣿⡆⠈⠙⠲⣤⡀⠀⠀⠀⠀⠀⢸⡇⠀⠀⢸⡇⠀
+⠀⠀⠀⠀⡇⢰⣄⣤⣾⠀⠀⠀⢀⣠⠶⠋⠁⠀⢀⣾⣿⢿⣿⣾⣇⢹⡏⣻⣿⠞⠀⠀⠀⠰⣿⣏⣸⡇⣾⣿⣿⣿⣿⣿⠀⠀⠀⠀⠙⠳⢦⣀⠀⠀⢸⢳⣦⡞⢸⡇⠀
+⠀⠀⠀⠀⣷⡼⣯⡽⢿⣆⣤⣞⣋⣀⣀⣀⣀⣀⣸⣿⣿⣧⠬⠹⣯⣬⣿⠉⠹⣄⠀⠀⠀⣰⠏⠉⣿⢤⣿⠟⠲⣾⣿⣻⣧⣤⣤⣤⡤⠤⠤⠽⠿⢦⡼⠛⣷⠛⢿⠀⠀
+⠀⠀⠀⠀⢻⡄⠘⠃⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣷⣄⠀⢻⣿⠏⢦⠀⠈⠐⠀⠸⡁⠀⡟⠙⣿⠟⠀⣠⣾⣿⣾⠃⠀⠀⠀⠀⠀⠀⠀⠀⢠⡇⠀⠙⢀⡿⠀⠀
+⠀⠀⠀⠀⠘⣇⠀⠀⠀⠈⡇⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣷⣄⠿⣄⠈⢿⡆⠀⠀⠀⢴⡿⠀⣠⠟⣠⣾⣿⢿⡽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠀⠀⠀⣸⠇⠀⠀
+⠀⠀⠀⠀⠀⢹⡆⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⢿⣶⡈⢦⢸⡇⠀⢠⠀⢸⡇⠐⢁⣼⣿⢿⣯⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠁⠀⠀⢠⡏⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢻⡄⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢶⣿⣿⣳⠀⠀⡇⠀⣼⠀⢸⡇⠀⣜⣿⣹⠶⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡼⠁⠀⠀⢀⡿⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀⠀⠀⠈⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⣯⡃⢸⡇⠀⢹⠂⠈⡇⠀⣿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠀⠀⠀⢠⡞⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⠷⣼⠃⠀⠀⠀⠀⢷⡰⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⣠⠟⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣄⠀⠀⠀⠀⠙⢦⣀⠀⠀⠀⠀⠀⠀⠀⢿⣴⣿⣦⣀⣠⣀⣤⣿⣧⢾⠆⠀⠀⠀⠀⠀⠀⠀⣠⠶⠃⠀⠀⠀⢀⡼⠋⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⠀⠀⠀⣆⣉⣷⢦⣀⠀⠀⠀⠀⢸⡜⠿⣷⣿⣿⠿⣽⡿⠛⡞⠀⠀⠀⠀⢀⣠⣴⢊⣁⠀⠀⠀⢀⣴⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠦⣄⣠⢿⣩⡷⡄⠈⠙⠓⠤⢤⣀⣙⣦⣈⣻⣦⣾⣁⣠⣞⣁⣀⠤⠴⠚⠋⣀⣿⣻⣧⡀⣀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠦⣟⡀⠀⠀⠀⠀⠀⠀⠀⠉⠉⢿⡿⠷⣿⢿⡯⠉⠉⠀⠀⠀⠀⠀⠉⠉⣿⡾⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠶⣄⣀⡀⠀⠀⠀⠀⠀⠙⣶⡿⢸⠇⠀⠀⠀⠀⣀⣠⠴⠞⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠛⠒⠒⠲⢾⣟⡥⠿⠒⠒⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+    <p>Discord lucac4416</p>
 </body>
 </html>
